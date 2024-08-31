@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.mapper.OrderDetailMapper">
+    <!--       mapper接口和映射文件要保持两个一致
+           1.mapper 接口的全类名和映射文件的namespace一致
+           2.mapper 接口中的方法的方法名要和映射文件中的sql的id保持一致
+           -->
+
+    <insert id="insertBatch">
+        insert into order_detail
+        (name, order_id, dish_id, setmeal_id, dish_flavor, number, amount, image)
+        values
+        <foreach collection="orderDetailList" item="od" separator=",">
+            (#{od.name}, #{od.orderId}, #{od.dishId}, #{od.setmealId}, #{od.dishFlavor},
+             #{od.number}, #{od.amount}, #{od.image})
+        </foreach>
+    </insert>
+</mapper>
